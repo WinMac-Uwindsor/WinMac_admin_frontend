@@ -7,6 +7,7 @@ import "./Navbar.css";
 
 import { Link,  } from "react-router-dom";
 import "./App.css";
+import { color } from "@mui/system";
 
 
 function Navbar() {
@@ -14,10 +15,12 @@ function Navbar() {
   
   const linkStyle = {
     margin: "1rem",
-    textDecoration: "none",
+    
+    color:"white",
+    textdecoration:"none"
   };
   return (
-    <AppBar position="relative">
+    <AppBar className="appBar" position="relative">
       <CssBaseline />
       <Toolbar>
         <Typography variant="h4" >
@@ -35,6 +38,12 @@ function Navbar() {
           </Link>
           <Link to="/Attendance"  style={linkStyle}>
           Attendance
+          </Link>
+          <Link to="/Records"  style={linkStyle}>
+          Records
+          </Link>
+          <Link to="/QRGenerator"  style={linkStyle}>
+          QRGenerator
           </Link>
       </Toolbar>
     </AppBar>

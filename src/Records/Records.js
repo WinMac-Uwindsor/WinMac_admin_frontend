@@ -1,12 +1,11 @@
 
 import {useState} from 'react'
-import {Data} from '../Components/DashboardData'
+import {RecordsData} from '../Components/RecordsData'
 import * as XLSX from 'xlsx'
 import "../Navbar.css"
-import { Button } from '@mui/material';
-import "./DashBoard.css"
+import"../DashBoard/DashBoard.css"
 
-function Dashboard() {
+function Records() {
   
   // on change states
   const [excelFile, setExcelFile]=useState(null);
@@ -49,7 +48,7 @@ function Dashboard() {
       const worksheetName = workbook.SheetNames[0];
       const worksheet=workbook.Sheets[worksheetName];
       const data = XLSX.utils.sheet_to_json(worksheet);
-      console.log(typeof(data));
+      console.log(data);
       setExcelData(data);
     }
     else{
@@ -58,7 +57,7 @@ function Dashboard() {
   }
   
   return (
-    <div>
+    <div >
 
       {/* upload file section */}
       <div className='form'>
@@ -78,13 +77,13 @@ function Dashboard() {
       <br></br>
       <hr></hr>
 
-      {/* view file section */}
-      <div className='sendExcelData'>
+      {/* view file section */} <div className='sendExcelData'>
       <h5>View Excel file</h5>
       <button onClick={()=>
       setExcelData(null)} className='btn btn-success'
           style={{marginTop:5+'px'}}>Send Data</button>
       </div>
+     
       <div className='viewer'>
         {excelData===null&&<>No file selected</>}
         {excelData!==null&&(
@@ -93,16 +92,14 @@ function Dashboard() {
               <thead>
                 <tr>
                   
-                  <th scope='col'>Name</th>
-                  <th scope='col'>Company</th>
-                  <th scope='col'>Role</th>
-                  <th scope='col'>Date</th>
-                  <th scope='col'>Internship Duration</th>                  
-                  <th scope='col'>Intake</th>                  
+                  <th scope='col'>Email</th>
+                  <th scope='col'>Username</th>
+                  <th scope='col'>Password</th>
+                                   
                 </tr>
               </thead>
               <tbody>
-                <Data excelData={excelData}/>
+                <RecordsData excelData={excelData}/>
               </tbody>
             </table>            
           </div>
@@ -113,4 +110,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default Records;

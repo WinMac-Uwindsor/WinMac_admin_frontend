@@ -1,0 +1,24 @@
+.conatiner {
+    margin-top: 10;
+  }
+  .title {
+    display: flex;
+    justify-content: center;
+    align-items:  center;
+    background: #1976d2;
+    color: #fff;
+    padding: 20;
+    
+  }
+ .btn {
+    margin-top: 10;
+    margin-bottom: 20;
+    background:#1976d2;
+
+  }
+  .body{
+    display:flex;
+    
+    justify-content: center;
+    align-items: center;
+  }
