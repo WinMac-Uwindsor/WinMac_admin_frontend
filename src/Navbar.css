@@ -1,0 +1,14 @@
+.navlinks {
+  margin-left: 5;
+  display: flex;
+}
+.logo {
+  flex-grow: "1";
+  cursor: "pointer";
+}
+.link {
+  text-decoration: none;
+  font-size: 20px;
+  color: white;
+  font: "20px";
+}
