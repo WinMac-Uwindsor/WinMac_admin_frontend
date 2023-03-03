@@ -7,9 +7,15 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
+import { useNavigate } from 'react-router-dom';
 
 
 const Events = (props) => {
+
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate('/QRGenerator');
+  }
   const [data, setData] = useState([]);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -88,6 +94,15 @@ const Events = (props) => {
           <Button type="submit" variant="contained" color="primary">
             Submit
           </Button>
+          
+                <Button
+                  onClick={handleClick}
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Generate QR
+                </Button>
+              
         </form>
         
       <div>
