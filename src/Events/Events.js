@@ -13,8 +13,8 @@ import { useNavigate } from 'react-router-dom';
 const Events = (props) => {
 
   const navigate = useNavigate();
-  const handleClick = () => {
-    navigate('/QRGenerator');
+  function handleClick(eventId) {
+    navigate(`/QRGenerator/${eventId}`);
   }
   const [data, setData] = useState([]);
   const [title, setTitle] = useState('');
@@ -91,17 +91,12 @@ const Events = (props) => {
             required
           />
           
+          
           <Button type="submit" variant="contained" color="primary">
             Submit
           </Button>
           
-                <Button
-                  onClick={handleClick}
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
-                >
-                  Generate QR
-                </Button>
+                
               
         </form>
         
@@ -141,11 +136,12 @@ const Events = (props) => {
                 Update
               </Button>{" "}
               <Button
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                QR
-              </Button>{" "}
+                  onClick={()=>handleClick(`${item.event_id}`)}
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Generate QR
+                </Button>
             </div>
             }
           </Card>

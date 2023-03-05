@@ -23,7 +23,7 @@ function App() {
         <Route path="/Complaints" element={<Complaints />} />
         <Route path="/Attendance" element={<Attendance />} />
         <Route path="/Records" element={<Records />} />
-        <Route path="/QRGenerator" element={<QRGenerator />} />
+        <Route path="/QRGenerator/:myString" element={<QRGenerator />} />
       </Routes>
     </>
   );

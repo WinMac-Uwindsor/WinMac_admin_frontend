@@ -153,7 +153,7 @@ const Navbar = () => {
               </ListItem>
             </Link>
             <Link
-              to="/QRGenerator"
+              to="/QRGenerator/:myString"
               style={linkStyle}
               onClick={() => setName("QRGenerator")}
             >
