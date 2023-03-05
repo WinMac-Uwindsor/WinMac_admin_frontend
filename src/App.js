@@ -6,6 +6,7 @@ import Navbar from "./Navbar";
 import Attendance from "./Attendance/Attendance";
 import { Route, Routes } from "react-router-dom";
 import Records from "./Records/Records";
+import Login from "./Login/Login";
 import QRGenerator from "./QR/QRGenerator";
 
 function App() {
@@ -15,6 +16,8 @@ function App() {
     {/* <Login /> */}
       <Navbar />
       <Routes>
+      <Route exact path="/login" element={<Login />} />
+
         <Route path="/DashBoard" element={<DashBoard />} />
         <Route path="/Events" element={<Events />} />
         <Route path="/Complaints" element={<Complaints />} />

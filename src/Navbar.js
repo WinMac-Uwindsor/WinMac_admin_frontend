@@ -14,15 +14,23 @@ import Toolbar from "@mui/material/Toolbar";
 import BookIcon from "@mui/icons-material/Book";
 import Hidden from "@mui/material/Hidden";
 import EventIcon from "@mui/icons-material/Event";
+import { useLocation } from "react-router-dom";
+
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import uwinLogo from "./uwindsor_logo.png";
 import ContactPageIcon from "@mui/icons-material/ContactPage";
 
 const Navbar = () => {
+  
   const [open, setOpen] = useState(false);
-  const [name, setName] = useState("DashBoard");
+  const location = useLocation();
+  const currentPage = location.pathname.substring(1); // remove the leading forward slash
+  const [name, setName] = useState(currentPage);
+
+  console.log("name",name)
 
   const toggleDrawer = (isOpen) => (event) => {
+    event.preventDefault();
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
