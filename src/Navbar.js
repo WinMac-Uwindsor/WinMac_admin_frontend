@@ -21,13 +21,12 @@ import uwinLogo from "./uwindsor_logo.png";
 import ContactPageIcon from "@mui/icons-material/ContactPage";
 
 const Navbar = () => {
-  
   const [open, setOpen] = useState(false);
   const location = useLocation();
   const currentPage = location.pathname.substring(1); // remove the leading forward slash
   const [name, setName] = useState(currentPage);
 
-  console.log("name",name)
+  console.log("name", name);
 
   const toggleDrawer = (isOpen) => (event) => {
     event.preventDefault();
@@ -103,17 +102,17 @@ const Navbar = () => {
                 <ListItemText primary="DashBoard" />
               </ListItem>
             </Link>
-            
+
             <Link
               to="/Events"
               style={linkStyle}
-              onClick={() => setName("Event")}
+              onClick={() => setName("Events")}
             >
               <ListItem button>
                 <ListItemIcon>
                   <EventIcon />
                 </ListItemIcon>
-                <ListItemText primary="Event" />
+                <ListItemText primary="Events" />
               </ListItem>
             </Link>
             <Link
@@ -152,18 +151,6 @@ const Navbar = () => {
                 <ListItemText primary="Records" />
               </ListItem>
             </Link>
-            <Link
-              to="/QRGenerator/:myString"
-              style={linkStyle}
-              onClick={() => setName("QRGenerator")}
-            >
-              <ListItem button>
-                <ListItemIcon>
-                  <AccountBoxIcon />
-                </ListItemIcon>
-                <ListItemText primary="QRGenerator" />
-              </ListItem>
-            </Link>
           </List>
         </div>
       </Drawer>
@@ -184,13 +171,11 @@ export default Navbar;
 // import "./App.css";
 // import { color } from "@mui/system";
 
-
 // function Navbar() {
- 
-  
+
 //   const linkStyle = {
 //     margin: "1rem",
-    
+
 //     color:"white",
 //     textdecoration:"none"
 //   };
@@ -204,7 +189,7 @@ export default Navbar;
 //           <Link to="/DashBoard"  style={linkStyle}>
 //             DashBoard
 //           </Link>
-          
+
 //           <Link to="/Events"  style={linkStyle}>
 //             Events
 //           </Link>
