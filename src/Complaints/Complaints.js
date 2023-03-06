@@ -8,6 +8,8 @@ import Typography from "@mui/material/Typography";
 import React, { useState, useEffect } from "react";
 
 export default function Complaints() {
+  const username = localStorage.getItem('username');
+
   const [details, setDetails] = useState([]);
 
   useEffect(() => {

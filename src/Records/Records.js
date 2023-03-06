@@ -6,7 +6,8 @@ import "../Navbar.css"
 import"../DashBoard/DashBoard.css"
 
 function Records() {
-  
+  const username = localStorage.getItem('username');
+
   // on change states
   const [excelFile, setExcelFile]=useState(null);
   const [excelFileError, setExcelFileError]=useState(null);  

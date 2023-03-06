@@ -15,6 +15,8 @@ import { useState } from "react";
 export default function Login() {
   const [currentForm, setCurrentForm] = useState("signup");
 
+  
+
   // const handleSubmit = (event) => {
   //   event.preventDefault();
   //   const data = new FormData(event.currentTarget);
@@ -24,24 +26,24 @@ export default function Login() {
   //     password: data.get("password"),
   //   });
   // };
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+
+  // const username = useContext(UserContext);
+ 
+
   const navigate = useNavigate();
   
   const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
+    //console.log(event);
+    console.log(event.target.value);
+    localStorage.setItem('username',event.target.value);
+
   };
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
+
   const handleLogin = () => {
-    if (username === "admin" && password === "password") {
+ 
       navigate('/DashBoard');
-    } else {
-      alert("Invalid credentials");
-    }
-  };
+    } ;
 
   return (
     <Box
@@ -63,7 +65,7 @@ export default function Login() {
           className="textfield"
           color="primary"
           onChange={handleUsernameChange}
-          value={username}
+          // value={username}
           margin="normal"
           required
           fullWidth
@@ -72,7 +74,7 @@ export default function Login() {
           name="email"
           autoFocus
         />
-        <TextField
+        {/* <TextField
           margin="normal"
           required
           fullWidth
@@ -82,7 +84,7 @@ export default function Login() {
           label="Password"
           type="password"
           id="password"
-        />
+        /> */}
 
         <FormControlLabel
           sx={{ alignItems: "left" }}

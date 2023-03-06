@@ -2,10 +2,16 @@ import React, { useState, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import QRCode from "qrcode";
+import { UserContext } from "../App";
+import { useContext } from 'react';
 import "./QRGenerator.css";
 import { Button, Card, CardContent, Container, TextField } from "@mui/material";
 function QRGenerator() {
+  const username = localStorage.getItem('username');
+
   const { myString } = useParams();
+  
+  console.log("uname", username)
 
   // const [text, setText] = useState(myString);
   const [imageUrl, setImageUrl] = useState("");

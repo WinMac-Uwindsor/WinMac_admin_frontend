@@ -20,9 +20,12 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import uwinLogo from "./uwindsor_logo.png";
 import ContactPageIcon from "@mui/icons-material/ContactPage";
 
+
 const Navbar = () => {
+  
+const location = useLocation();
+const showNavbar = location.pathname!='/';
   const [open, setOpen] = useState(false);
-  const location = useLocation();
   const currentPage = location.pathname.substring(1); // remove the leading forward slash
   const [name, setName] = useState(currentPage);
 
@@ -59,101 +62,102 @@ const Navbar = () => {
   };
   return (
     <div>
-      <AppBar position="static" sx={{ bgcolor: "ButtonText" }}>
-        <Toolbar>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            onClick={toggleDrawer(true)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <div style={img}>
-            <img
-              src={uwinLogo}
-              alt="Logo"
-              style={{ height: "40px", marginRight: "16px" }}
-            />
-          </div>
-          <Hidden smDown>
-            <Typography style={linkStyleHeaderNav} variant="h6">
-              {name}
-            </Typography>
-          </Hidden>
-        </Toolbar>
-      </AppBar>
-      <Drawer anchor="left" open={open} onClose={toggleDrawer(false)}>
-        <div
-          role="presentation"
-          onClick={toggleDrawer(false)}
-          onKeyDown={toggleDrawer(false)}
-        >
-          <List>
-            <Link
-              to="/DashBoard"
-              style={linkStyle}
-              onClick={() => setName("DashBoard")}
+      {showNavbar && (
+        <><AppBar position="static" sx={{ bgcolor: "ButtonText" }}>
+          <Toolbar>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              onClick={toggleDrawer(true)}
             >
-              <ListItem button>
-                <ListItemIcon>
-                  <HomeIcon />
-                </ListItemIcon>
-                <ListItemText primary="DashBoard" />
-              </ListItem>
-            </Link>
+              <MenuIcon />
+            </IconButton>
+            <div style={img}>
+              <img
+                src={uwinLogo}
+                alt="Logo"
+                style={{ height: "40px", marginRight: "16px" }} />
+            </div>
+            <Hidden smDown>
+              <Typography style={linkStyleHeaderNav} variant="h6">
+                {name}
+              </Typography>
+            </Hidden>
+          </Toolbar>
+        </AppBar><Drawer anchor="left" open={open} onClose={toggleDrawer(false)}>
+            <div
+              role="presentation"
+              onClick={toggleDrawer(false)}
+              onKeyDown={toggleDrawer(false)}
+            >
+              <List>
+                <Link
+                  to="/DashBoard"
+                  style={linkStyle}
+                  onClick={() => setName("DashBoard")}
+                >
+                  <ListItem button>
+                    <ListItemIcon>
+                      <HomeIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="DashBoard" />
+                  </ListItem>
+                </Link>
 
-            <Link
-              to="/Events"
-              style={linkStyle}
-              onClick={() => setName("Events")}
-            >
-              <ListItem button>
-                <ListItemIcon>
-                  <EventIcon />
-                </ListItemIcon>
-                <ListItemText primary="Events" />
-              </ListItem>
-            </Link>
-            <Link
-              to="/Complaints"
-              style={linkStyle}
-              onClick={() => setName("Support")}
-            >
-              <ListItem button>
-                <ListItemIcon>
-                  <ContactPageIcon />
-                </ListItemIcon>
-                <ListItemText primary="Support" />
-              </ListItem>
-            </Link>
-            <Link
-              to="/Attendance"
-              style={linkStyle}
-              onClick={() => setName("Attendance")}
-            >
-              <ListItem button>
-                <ListItemIcon>
-                  <AccountBoxIcon />
-                </ListItemIcon>
-                <ListItemText primary="Attendance" />
-              </ListItem>
-            </Link>
-            <Link
-              to="/Records"
-              style={linkStyle}
-              onClick={() => setName("Records")}
-            >
-              <ListItem button>
-                <ListItemIcon>
-                  <AccountBoxIcon />
-                </ListItemIcon>
-                <ListItemText primary="Records" />
-              </ListItem>
-            </Link>
-          </List>
-        </div>
-      </Drawer>
+                <Link
+                  to="/Events"
+                  style={linkStyle}
+                  onClick={() => setName("Events")}
+                >
+                  <ListItem button>
+                    <ListItemIcon>
+                      <EventIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Events" />
+                  </ListItem>
+                </Link>
+                <Link
+                  to="/Complaints"
+                  style={linkStyle}
+                  onClick={() => setName("Support")}
+                >
+                  <ListItem button>
+                    <ListItemIcon>
+                      <ContactPageIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Support" />
+                  </ListItem>
+                </Link>
+                <Link
+                  to="/Attendance"
+                  style={linkStyle}
+                  onClick={() => setName("Attendance")}
+                >
+                  <ListItem button>
+                    <ListItemIcon>
+                      <AccountBoxIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Attendance" />
+                  </ListItem>
+                </Link>
+                <Link
+                  to="/Records"
+                  style={linkStyle}
+                  onClick={() => setName("Records")}
+                >
+                  <ListItem button>
+                    <ListItemIcon>
+                      <AccountBoxIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Records" />
+                  </ListItem>
+                </Link>
+              </List>
+            </div>
+          </Drawer></>
+      )}
+      
     </div>
   );
 };

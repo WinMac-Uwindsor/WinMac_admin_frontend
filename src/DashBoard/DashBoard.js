@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { Data } from "../Components/DashboardData";
 import * as XLSX from "xlsx";
+import { UserContext } from "../App";
+import { useContext } from 'react';
+
 import "../Navbar.css";
 import { Button } from "@mui/material";
 import "./DashBoard.css";
 
 function Dashboard() {
+  const username = localStorage.getItem('username');
   // on change states
   const [excelFile, setExcelFile] = useState(null);
   
@@ -13,6 +17,8 @@ function Dashboard() {
 
   // submit
   const [excelData, setExcelData] = useState(null);
+  // const username = useContext(UserContext);
+  console.log("uname", username);
 
   // file handler
   //todo: Add types of files
@@ -55,6 +61,8 @@ function Dashboard() {
   return (
     <div>
       {/* upload file section */}
+      Welcome, {username}!
+
       <div className="form">
         <form className="form-group" autoComplete="off" onSubmit={handleSubmit}>
           <label>

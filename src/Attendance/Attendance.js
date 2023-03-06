@@ -11,6 +11,8 @@ import React, { useState, useEffect } from "react";
 // import makeStyles from '@mui/styles/makeStyles';
 
 const Attendance = () => {
+    const username = localStorage.getItem('username');
+
   const [attendance, setAttendanceList] = useState([]);
 
   useEffect(() => {}, []);

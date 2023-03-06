@@ -7,7 +7,11 @@ import Attendance from "./Attendance/Attendance";
 import { Route, Routes } from "react-router-dom";
 import Records from "./Records/Records";
 import Login from "./Login/Login";
+import { createContext } from "react";
+
 import QRGenerator from "./QR/QRGenerator";
+import { React, useState, useEffect } from "react";
+export const UserContext = createContext();
 
 function App() {
   return (
@@ -16,8 +20,7 @@ function App() {
       {/* <Login /> */}
       <Navbar />
       <Routes>
-        <Route exact path="/login" element={<Login />} />
-
+        <Route exact path="/" element={<Login />} />
         <Route path="/DashBoard" element={<DashBoard />} />
         <Route path="/Events" element={<Events />} />
         <Route path="/Complaints" element={<Complaints />} />

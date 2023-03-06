@@ -12,6 +12,8 @@ import TextField from "@mui/material/TextField";
 import { useNavigate } from "react-router-dom";
 
 const Events = (props) => {
+  const username = localStorage.getItem('username');
+
   const navigate = useNavigate();
   function handleClick(eventId) {
     navigate(`/QRGenerator/${eventId}`);
