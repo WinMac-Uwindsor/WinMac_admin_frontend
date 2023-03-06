@@ -1,6 +1,14 @@
 .button-container {
+<<<<<<< HEAD
     display: flex;
     width: 100%;
     
     justify-content: space-around;
   }
+=======
+  display: flex;
+  width: 100%;
+  
+  justify-content: space-around;
+}
+>>>>>>> dc66b840d6e9f1fd65b1eacfa93bc824d1bc13ce
