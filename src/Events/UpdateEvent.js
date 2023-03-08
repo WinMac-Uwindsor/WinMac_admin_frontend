@@ -8,17 +8,14 @@ import Typography from "@mui/material/Typography";
 import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import { useNavigate } from 'react-router-dom';
+import { Update } from "@mui/icons-material";
 
 
-const Events = () => {
+const UpdateEvent = () => {
 
   const navigate = useNavigate();
-  function handleGenerateQR(eventId) {
+  function handleClick(eventId) {
     navigate(`/QRGenerator/${eventId}`);
-  }
- 
-  function handleUpdate() {
-    navigate(`/UpdateEvent`);
   }
   const [data, setData] = useState([]);
   const [title, setTitle] = useState('');
@@ -160,70 +157,17 @@ const Events = () => {
           />
 
           
-          <Button type="submit" variant="contained" color="primary" >
+          <Button type="submit" variant="contained" color="primary">
             Submit
           </Button>
           
                 
               
         </form>
-        
-      <div>
-      <br/>
-      {data.length > 0 &&
-        data.data.map((item, index) => (
-          <Card sx={{ maxWidth: 700 }} className="event" key={index}>
-            <CardHeader
-              title={item.title}
-              subheader={"By: " + item.Presenter}
-            />
-            <CardContent>
-              <Typography variant="body2" color="text.secondary">
-                Date of Event: {item.title}
-                <br />
-                Time of Event: {item.time}
-                <br />
-                Location of Event: {item.location}
-                <br />
-                Event Description: {item.Desc}
-                Event Date: {item.date}
-                Event startTime: {item.startTime}
-                Event end time: {item.endTime}
-
-
-              </Typography>
-            </CardContent>{" "}
-            {
-              <div className="eventBtn" >
-              <Button
-                onClick={() => deleteEvent(item.event_id)}
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Delete
-              </Button>{" "}
-              <Button
-                  onClick={()=>handleUpdate()}
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
-                >
-                  Update
-                </Button>{" "}
-              <Button
-                  onClick={()=>handleGenerateQR(`${item.event_id}`)}
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
-                >
-                  Generate QR
-                </Button>
-            </div>
-            }
-          </Card>
-        ))}
-      </div>
+    
         
     </div>
   );
 };
 
-export default Events;
+export default UpdateEvent;
