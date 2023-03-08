@@ -8,6 +8,7 @@ import { Route, Routes } from "react-router-dom";
 import Records from "./Records/Records";
 import Login from "./Login/Login";
 import QRGenerator from "./QR/QRGenerator";
+import UpdateEvent from "./Events/UpdateEvent";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/Attendance" element={<Attendance />} />
         <Route path="/Records" element={<Records />} />
         <Route path="/QRGenerator/:myString" element={<QRGenerator />} />
+        <Route path="/UpdateEvent" element={<UpdateEvent />} />
       </Routes>
     </>
   );
