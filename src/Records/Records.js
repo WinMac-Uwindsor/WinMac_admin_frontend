@@ -4,6 +4,7 @@ import {RecordsData} from '../Components/RecordsData'
 import * as XLSX from 'xlsx'
 import "../Navbar.css"
 import"../DashBoard/DashBoard.css"
+import axios from "axios";
 
 function Records() {
   const username = localStorage.getItem('username');
@@ -11,6 +12,8 @@ function Records() {
   // on change states
   const [excelFile, setExcelFile]=useState(null);
   const [excelFileError, setExcelFileError]=useState(null);  
+  const [dataS, setDataS] = useState(null);
+
  
   // submit
   const [excelData, setExcelData]=useState(null);
@@ -41,21 +44,56 @@ function Records() {
     }
   }
 
-  // submit function
-  const handleSubmit=(e)=>{
-    e.preventDefault();
-    if(excelFile!==null){
-      const workbook = XLSX.read(excelFile,{type:'buffer'});
-      const worksheetName = workbook.SheetNames[0];
-      const worksheet=workbook.Sheets[worksheetName];
-      const data = XLSX.utils.sheet_to_json(worksheet);
-      console.log(data);
-      setExcelData(data);
-    }
-    else{
+  function SendData(data) {
+    console.log("Inside sendData");
+    const passStr = data.Password.toString();
+    axios
+      .post("http://localhost:5000/winmac/studentData/registerUser", 
+      {
+        "username": data.Username,
+        "password": passStr,
+        "email": data.Email,
+        "name": data.Name,
+        "intake": data.Intake
+      })
+      .then((response) => {
+        console.log("complaint adding success", response.data);
+      })
+      .catch((error) => {
+        console.error("Error adding complaint:", error);
+      });
+  }
+
+  function addStudents() {
+    console.log(dataS);
+    if (!dataS) {
+      return console.log('empty data cannot be added');
+    } else {
+      for (var i = 0; i < dataS.length; i++) {
+        SendData(dataS[i]);
+      }
+      console.log('Students Successfully added ' + dataS.length);
       setExcelData(null);
     }
   }
+  
+
+
+  // submit function
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (excelFile !== null) {
+      const workbook = XLSX.read(excelFile, { type: 'buffer' });
+      const worksheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[worksheetName];
+      const data = XLSX.utils.sheet_to_json(worksheet);
+      console.log(data);
+      setDataS(data); // update dataS using setDataS function
+    } else {
+      setDataS(null); // update dataS using setDataS function
+    }
+  };
+  
   
   return (
     <div >
@@ -80,8 +118,8 @@ function Records() {
 
       {/* view file section */} <div className='sendExcelData'>
       <h5>View Excel file</h5>
-      <button onClick={()=>
-      setExcelData(null)} className='btn btn-success'
+      <button onClick={(data)=>
+      addStudents(dataS)} className='btn btn-success'
           style={{marginTop:5+'px'}}>Send Data</button>
       </div>
      
@@ -96,6 +134,7 @@ function Records() {
                   <th scope='col'>Email</th>
                   <th scope='col'>Username</th>
                   <th scope='col'>Password</th>
+                  <th scope='col'>Intake</th>
                                    
                 </tr>
               </thead>
