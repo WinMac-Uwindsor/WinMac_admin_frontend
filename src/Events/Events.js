@@ -12,6 +12,8 @@ import UpdateEvent from "./UpdateEvent";
 import Backdrop from "@mui/material/Backdrop";
 import Fade from "@mui/material/Fade";
 import Box from "@mui/material/Box";
+import moment from "moment";
+
 
 import Modal from "@mui/material/Modal";
 
@@ -182,7 +184,7 @@ const Events = (props) => {
             shrink: true,
           }}
         />
-        <TextField
+       <TextField
           name="startTime"
           label="Start Time"
           type="time"
@@ -214,6 +216,7 @@ const Events = (props) => {
             step: 300,
           }}
         />
+        
 
         <Button type="submit" variant="contained" color="primary">
           Submit
