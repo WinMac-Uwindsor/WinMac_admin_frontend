@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-import * as React from "react";
-import Box from "@mui/material/Box";
-
-function DashBoard() {
-  return (
-    <>
-      <Box sx={{ display: "flex" }}>
-
-      DashBoard
-
-      </Box>
-     
-    </>
-  );
-}
-
-export default DashBoard;
-=======
 import { useState } from "react";
 import { Data } from "../Components/DashboardData";
 import * as XLSX from "xlsx";
@@ -150,4 +131,3 @@ function Dashboard() {
 }
 
 export default Dashboard;
->>>>>>> dc66b840d6e9f1fd65b1eacfa93bc824d1bc13ce

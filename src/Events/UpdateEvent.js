@@ -158,7 +158,7 @@ const UpdateEvent = () => {
 
           
           <Button type="submit" variant="contained" color="primary">
-            Submit
+            Update
           </Button>
           
                 
