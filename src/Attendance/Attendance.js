@@ -24,7 +24,7 @@ const Attendance = () => {
     return fetch("https://acservices-winmac-admin.onrender.com/winmac/studentData/attendance", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ intake: intake }),
+      body: JSON.stringify({ intake: `\"${intake}\"` }),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -41,8 +41,8 @@ const Attendance = () => {
   }
 
   function getCurrentDate() {
-    var fall = "FALL-";
-    var summer = "SUMMER-";
+    var fall = "Fall-";
+    var summer = "Summer-";
     var winter = "Winter-";
     const currentDate = new Date();
     const currentYear = currentDate.getFullYear();
@@ -116,15 +116,15 @@ const Attendance = () => {
   }
 
   return (
-    <div>
+    <div className="attendance">
       <div className="button-container">
-        <Button variant="contained" onClick={handleAttendanceFall}>
+        <Button variant="contained" className="button-container" sx ={{margin: 2}} onClick={handleAttendanceFall}>
           Fall
         </Button>
-        <Button variant="contained" onClick={handleAttendanceSpring}>
-          Spring
+        <Button sx ={{margin: 2}} variant="contained" onClick={handleAttendanceSpring}>
+          Summer
         </Button>
-        <Button variant="contained" onClick={handleAttendanceWinter}>
+        <Button sx ={{margin: 2}} variant="contained" onClick={handleAttendanceWinter}>
           Winter
         </Button>
       </div>

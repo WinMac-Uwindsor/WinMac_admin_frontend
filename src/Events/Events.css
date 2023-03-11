@@ -1,6 +1,6 @@
 .event {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 .form{
   padding-top: 10px;
@@ -9,6 +9,7 @@
   max-width: 700px;
   margin: 0 auto ;
 }
+
 
 .eventCard {
   align-items: center;
@@ -27,11 +28,7 @@
       margin: auto;
       margin-bottom: 10px ;
     }
-    .eventBtn{
-      display: flex;
-      align-content: space-between;
-      max-width: auto;;
-    }
+    
   
 
     .title {

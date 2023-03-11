@@ -224,40 +224,71 @@ const Events = (props) => {
         <br />
         {data.length > 0 &&
           data.data.map((item, index) => (
-            <Card sx={{ maxWidth: 700 }} className="event" key={index}>
+            <Card sx={{ marginRight:10}}  key={index}>
               <CardHeader
                 title={item.title}
                 subheader={"By: " + item.Presenter}
               />
               <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                  Date of Event: {item.title}
+                  Name of Event: {item.title}
                   <br />
                   Time of Event: {item.time}
                   <br />
                   Location of Event: {item.location}
                   <br />
                   Event Description: {item.Desc}
+                  <br />
                   Event Date: {item.date}
+                  <br />
                   Event startTime: {item.startTime}
+                  <br />
                   Event end time: {item.endTime}
                 </Typography>
               </CardContent>{" "}
               {
-                <div className="eventBtn">
-                  <Button
+                <div >
+                  <Button variant="contained" className="button-container" sx ={{margin: 2}} onClick={() => deleteEvent(item.event_id)}>
+                  Delete
+        </Button>
+        <Button sx ={{margin: 2}} variant="contained" onClick={handleOpen}>
+        Update
+        </Button>
+        <Modal
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    open={open}
+                    onClose={handleClose}
+                    closeAfterTransition
+                    slots={{ backdrop: Backdrop }}
+                    slotProps={{
+                      backdrop: {
+                        timeout: 500,
+                      },
+                    }}
+                  >
+                    <Fade in={open}>
+                      <Box sx={style}>
+                        <UpdateEvent />
+                      </Box>
+                    </Fade>
+                  </Modal>
+        <Button sx ={{margin: 2}} variant="contained" onClick={() => handleGenerateQR(`${item.event_id}`)}>
+        Generate QR
+        </Button>
+                  {/* <Button
                     onClick={() => deleteEvent(item.event_id)}
                     variant="contained"
-                    sx={{ mt: 3, mb: 2 }}
+                    sx={{ mt: 5, mb: 4 }}
                   >
                     Delete
                   </Button>{" "}
                   <Button
-                    variant="contained"
-                    color="primary"
+                     variant="contained"
+                     sx={{ mt: 5, mb: 4 }}
                     onClick={handleOpen}
                   >
-                    Open modal
+                    Update
                   </Button>
                   <Modal
                     aria-labelledby="transition-modal-title"
@@ -279,12 +310,12 @@ const Events = (props) => {
                     </Fade>
                   </Modal>
                   <Button
-                    onClick={() => `${item.event_id}`}
+                    onClick={() => handleGenerateQR(`${item.event_id}`)}
                     variant="contained"
-                    sx={{ mt: 3, mb: 2 }}
+                    sx={{ mt: 5, mb: 4 }}
                   >
                     Generate QR
-                  </Button>
+                  </Button> */}
                 </div>
               }
             </Card>

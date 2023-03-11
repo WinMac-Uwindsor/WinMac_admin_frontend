@@ -6,6 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import axios from "axios";
 import Typography from "@mui/material/Typography";
 import React, { useState, useEffect } from "react";
+import "./Complaints.css";
 
 export default function Complaints() {
   const username = localStorage.getItem('username');
@@ -42,11 +43,12 @@ export default function Complaints() {
   console.log("Details: " + JSON.stringify(details));
 
   return (
-    <div>
+ 
+    <div className="body">
       <br />
       {details.length > 0 &&
         details.data.map((item, index) => (
-          <Card sx={{ maxWidth: 700 }} className="event" key={index}>
+          <Card sx={{ maxWidth: 700 , marginBottom:2 }} className="event" key={index}>
             <CardHeader subheader={"Ticket No.: " + item._id} />
             <CardContent>
               <Typography variant="body2" color="text.secondary">
@@ -60,7 +62,7 @@ export default function Complaints() {
                 onClick={() => deleteComplaint(item._id)}
                 type="submit"
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 3, mb: 2 ,marginRight:2}}
               >
                 Cancel
               </Button>
