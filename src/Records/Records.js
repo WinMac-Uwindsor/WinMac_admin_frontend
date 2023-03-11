@@ -71,6 +71,7 @@ function Records() {
     } else {
       for (var i = 0; i < dataS.length; i++) {
         SendData(dataS[i]);
+        setTimeout(() => {console.log("I waited for 1 second.");}, 1000); // 1000 milliseconds = 1 second
       }
       console.log('Students Successfully added ' + dataS.length);
       setExcelData(null);
@@ -88,8 +89,10 @@ function Records() {
       const worksheet = workbook.Sheets[worksheetName];
       const data = XLSX.utils.sheet_to_json(worksheet);
       console.log(data);
+      setExcelData(data);
       setDataS(data); // update dataS using setDataS function
     } else {
+      setExcelData(null);
       setDataS(null); // update dataS using setDataS function
     }
   };
