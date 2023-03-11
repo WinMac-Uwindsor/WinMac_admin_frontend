@@ -17,7 +17,7 @@ export default function Complaints() {
   }, []);
 
   function getComplsints() {
-    axios.get("http://localhost:5000/winmac/support/").then((response) => {
+    axios.get("https://acservices-winmac-admin.onrender.com/winmac/support/").then((response) => {
       setDetails(response.data);
       console.log("response: " + response.data);
     });
@@ -26,7 +26,7 @@ export default function Complaints() {
   function deleteComplaint(id) {
     console.log("id: " + id);
     axios
-      .post("http://localhost:5000/winmac/support/deleteTicket", {
+      .post("https://acservices-winmac-admin.onrender.com/winmac/support/deleteTicket", {
         event_id: id,
       })
       .then((response) => {

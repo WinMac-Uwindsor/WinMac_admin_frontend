@@ -48,7 +48,7 @@ function Records() {
     console.log("Inside sendData");
     const passStr = data.Password.toString();
     axios
-      .post("http://localhost:5000/winmac/studentData/registerUser", 
+      .post("https://acservices-winmac-admin.onrender.com/winmac/studentData/registerUser", 
       {
         "username": data.Username,
         "password": passStr,

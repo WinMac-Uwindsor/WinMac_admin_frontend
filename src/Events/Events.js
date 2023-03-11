@@ -55,7 +55,7 @@ const Events = (props) => {
   }, []);
 
   function getEvents() {
-    axios.get("http://localhost:5000/winmac/eventList").then((response) => {
+    axios.get("https://acservices-winmac-admin.onrender.com/winmac/eventList").then((response) => {
       setData(response.data);
       console.log(response.data);
     });
@@ -63,7 +63,7 @@ const Events = (props) => {
 
   function deleteEvent(event) {
     console.log("eventid: " + event);
-    const url = "http://localhost:5000/winmac/eventList/deleteEvent";
+    const url = "https://acservices-winmac-admin.onrender.com/winmac/eventList/deleteEvent";
     const data = { event_id: event };
 
     axios
@@ -104,7 +104,33 @@ const Events = (props) => {
     setLocation("");
     setStartTime("");
     setEndTime("");
+    setDate("");
+    setLimit("");
+    addEventData(title, description, author, limit, location, date, startTime+"-"+endTime);
   }
+
+  function addEventData(title, description, author, limit, location, date, etime){
+    const url = 'https://acservices-winmac-admin.onrender.com/winmac/eventList/addEvent';
+    const data = { 
+      "title": title,  
+      "limit": limit,
+      "date": date, 
+      "time": etime, 
+      "location": location, 
+      "Presenter": author, 
+      "Desc": description
+    };
+    
+    axios.post(url, data)
+      .then(response => {
+        console.log(response.data);
+        getEvents();
+      })
+      .catch(error => {
+        console.error("This is error: ",error);
+      });
+  }
+
 
   return (
     <div className="event">

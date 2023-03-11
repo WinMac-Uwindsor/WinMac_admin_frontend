@@ -21,7 +21,7 @@ const Attendance = () => {
 
   function getAttendance(intake) {
     console.log("intake: " + intake);
-    return fetch("http://localhost:5000/winmac/studentData/attendance", {
+    return fetch("https://acservices-winmac-admin.onrender.com/winmac/studentData/attendance", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ intake: intake }),
