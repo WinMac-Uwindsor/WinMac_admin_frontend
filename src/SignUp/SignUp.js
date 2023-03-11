@@ -12,11 +12,8 @@ import { useState } from "react";
 
 
 export default function SignUp() {
-<<<<<<< HEAD
-=======
   const username = localStorage.getItem('username');
 
->>>>>>> dc66b840d6e9f1fd65b1eacfa93bc824d1bc13ce
   const [currentForm, setCurrentForm] = useState("signup");
 
   const handleSubmit = (event) => {
