@@ -29,6 +29,9 @@ export default function Login() {
 
   // const username = useContext(UserContext);
  
+  const [username, setUsername] = useState("");
+  const [usernameError, setUsernameError] = useState("");
+  
 
   const navigate = useNavigate();
   
@@ -36,15 +39,30 @@ export default function Login() {
     //console.log(event);
     console.log(event.target.value);
     localStorage.setItem('username',event.target.value);
+    setUsername(event.target.value);
+  };
 
+  const isValidUsername = (username) => {
+    // Define your validation criteria here, e.g. length, format, etc.
+    // Return true if the username is valid, false otherwise
+    return true;
   };
 
 
   const handleLogin = () => {
- 
+    // Check if the username is not empty
+    if (username.trim() === "") {
+      setUsernameError("Username is required.");
+    } else if (!isValidUsername(username)) { // Define a custom validation function
+      setUsernameError("Invalid username.");
+    } else {
+      setUsernameError("");
+      // Store the username in local storage
+      localStorage.setItem("username", username);
+      // Navigate to the dashboard
       navigate('/DashBoard');
-    } ;
-
+    }
+  };
   return (
     <Box
       sx={{
@@ -61,19 +79,20 @@ export default function Login() {
         Login
       </Typography>
       <Box>
-        <TextField
-          className="textfield"
-          color="primary"
-          onChange={handleUsernameChange}
-          // value={username}
-          margin="normal"
-          required
-          fullWidth
-          id="email"
-          label="Uwin Email Address"
-          name="email"
-          autoFocus
-        />
+      <TextField
+        className="textfield"
+        color="primary"
+        onChange={handleUsernameChange}
+        margin="normal"
+        required
+        fullWidth
+        id="email"
+        label="Uwin Email Address"
+        name="email"
+        autoFocus
+        error={Boolean(usernameError)}
+        helperText={usernameError}
+      />
         {/* <TextField
           margin="normal"
           required
