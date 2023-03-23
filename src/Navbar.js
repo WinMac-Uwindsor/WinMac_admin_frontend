@@ -37,7 +37,7 @@ function Header() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
-  };
+  };  
 
   const img = {
     maxWidth: "100%",

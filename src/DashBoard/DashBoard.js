@@ -52,6 +52,7 @@ function Dashboard() {
       const worksheet = workbook.Sheets[worksheetName];
       const data = XLSX.utils.sheet_to_json(worksheet);
       console.log(typeof data);
+      console.log(data)
       setExcelData(data);
     } else {
       setExcelData(null);

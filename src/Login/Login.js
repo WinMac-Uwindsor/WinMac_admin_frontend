@@ -10,116 +10,66 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from 'react-router-dom';
 
-import { useState } from "react";
 
-export default function Login() {
-  const [currentForm, setCurrentForm] = useState("signup");
+import  { useState } from "react";
 
-  
+const VALID_USERNAME = "myusername";
+const VALID_PASSWORD = "mypassword";
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   console.log({
-
-  //     email: data.get("email"),
-  //     password: data.get("password"),
-  //   });
-  // };
-
-  // const username = useContext(UserContext);
- 
+const LoginForm = () => {
   const [username, setUsername] = useState("");
-  const [usernameError, setUsernameError] = useState("");
+  const [password, setPassword] = useState("");
   
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
-  
   const handleUsernameChange = (event) => {
-    //console.log(event);
-    console.log(event.target.value);
-    localStorage.setItem('username',event.target.value);
     setUsername(event.target.value);
   };
 
-  const isValidUsername = (username) => {
-    // Define your validation criteria here, e.g. length, format, etc.
-    // Return true if the username is valid, false otherwise
-    return true;
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
   };
 
-
-  const handleLogin = () => {
-    // Check if the username is not empty
-    if (username.trim() === "") {
-      setUsernameError("Username is required.");
-    } else if (!isValidUsername(username)) { // Define a custom validation function
-      setUsernameError("Invalid username.");
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (username !== VALID_USERNAME || password !== VALID_PASSWORD) {
+      setError("Invalid username or password");
     } else {
-      setUsernameError("");
-      // Store the username in local storage
-      localStorage.setItem("username", username);
-      // Navigate to the dashboard
+      // Login successful
+
       navigate('/DashBoard');
+      localStorage.setItem('username',event.target.value);
+
+      console.log("Login successful");
     }
   };
-  return (
-    <Box
-      sx={{
-        marginTop: 6,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      <Avatar sx={{ bgcolor: indigo[500] }}>
-        <LockOutlinedIcon />
-      </Avatar>
-      <Typography component="h1" variant="h5">
-        Login
-      </Typography>
-      <Box>
-      <TextField
-        className="textfield"
-        color="primary"
-        onChange={handleUsernameChange}
-        margin="normal"
-        required
-        fullWidth
-        id="email"
-        label="Uwin Email Address"
-        name="email"
-        autoFocus
-        error={Boolean(usernameError)}
-        helperText={usernameError}
-      />
-        {/* <TextField
-          margin="normal"
-          required
-          fullWidth
-          value={password}
-          onChange={handlePasswordChange}
-          name="password"
-          label="Password"
-          type="password"
-          id="password"
-        /> */}
 
-        <FormControlLabel
-          sx={{ alignItems: "left" }}
-          control={<Checkbox value="remember" color="primary" />}
-          label="Remember me"
-        />
-        <Button
-          onClick={handleLogin}
-          type="submit"
-          fullWidth
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-        >
-          Login
-        </Button>
-      </Box>
-    </Box>
+  return (
+    <form onSubmit={handleSubmit}>
+      <TextField
+        label="Username"
+        variant="outlined"
+        fullWidth
+        margin="normal"
+        value={username}
+        onChange={handleUsernameChange}
+      />
+      <TextField
+        label="Password"
+        type="password"
+        variant="outlined"
+        fullWidth
+        margin="normal"
+        value={password}
+        onChange={handlePasswordChange}
+      />
+      <Button variant="contained" color="primary" type="submit">
+        Login
+      </Button>
+      {error && <p>{error}</p>}
+    </form>
   );
-}
+};
+
+export default LoginForm;
