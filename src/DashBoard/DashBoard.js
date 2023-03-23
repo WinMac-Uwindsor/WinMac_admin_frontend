@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Data } from "../Components/DashboardData";
 import * as XLSX from "xlsx";
+import axios from "axios";
 import { UserContext } from "../App";
 import { useContext } from 'react';
 
@@ -51,12 +52,68 @@ function Dashboard() {
       const worksheetName = workbook.SheetNames[0];
       const worksheet = workbook.Sheets[worksheetName];
       const data = XLSX.utils.sheet_to_json(worksheet);
-      console.log(typeof data);
+      console.log( data);
       setExcelData(data);
     } else {
       setExcelData(null);
     }
   };
+
+  function addData(){
+    var i = 13;
+    axios({
+      method: 'post',
+      url: 'http://127.0.0.1:8000/field/',
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+        'Access-Control-Allow-Headers': 'Content-Type',
+      },
+      body :{
+        "id": i,
+        "Name": `${excelData[i]['Name']}`,
+        "Company":  `${excelData[i]['Company']}`,
+        "Role":  `${excelData[i]['Role']}`,
+        "Date":  `${excelData[i]['Date']}`,
+        "InternshipDuration":  `${excelData[i]['InternshipDuration']}`,
+        "Intake":  `${excelData[i]['Intake']}`
+    }
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    
+    
+    
+      
+    //   const studentdata =  {
+    //     "id": i,
+    //     "Name": `${excelData[i]['Name']}`,
+    //     "Company":  `${excelData[i]['Company']}`,
+    //     "Role":  `${excelData[i]['Role']}`,
+    //     "Date":  `${excelData[i]['Date']}`,
+    //     "InternshipDuration":  `${excelData[i]['InternshipDuration']}`,
+    //     "Intake":  `${excelData[i]['Intake']}`
+    // };
+    // const url = 'http://127.0.0.1:8000/field/';
+    // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+
+    //   axios.post(url, studentdata)
+    //     .then(response => {
+    //       console.log(response.data);
+    //       // getEvents();
+    //     })
+    //     .catch(error => {
+    //       console.error("This is error: ",error);
+    //     });
+
+    
+    setExcelData(null);
+    
+  }
 
   return (
     <div>
@@ -97,7 +154,7 @@ function Dashboard() {
       <div className="sendExcelData">
         <h5>View Excel file</h5>
         <button
-          onClick={() => setExcelData(null)}
+          onClick={addData}
           className="btn btn-success"
           style={{ marginTop: 5 + "px" }}
         >
