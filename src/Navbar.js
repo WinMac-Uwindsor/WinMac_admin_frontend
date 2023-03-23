@@ -1,60 +1,43 @@
-import React, { useState } from "react";
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import { Link } from "react-router-dom";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { Link } from "react-router-dom";
-import { AppBar } from "@mui/material";
-import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import { ListItemIcon } from "@mui/material";
+import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
-import HomeIcon from "@mui/icons-material/Home";
-import { ListItemText } from "@mui/material";
-import Toolbar from "@mui/material/Toolbar";
-import BookIcon from "@mui/icons-material/Book";
-
-import Hidden from "@mui/material/Hidden";
-import EventIcon from "@mui/icons-material/Event";
-import { useLocation } from "react-router-dom";
-
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import Container from "@mui/material/Container";
+import Button from "@mui/material/Button";
+import MenuItem from "@mui/material/MenuItem";
 import uwinLogo from "./uwindsor_logo.png";
-import ContactPageIcon from "@mui/icons-material/ContactPage";
 
+const navLinks = [
+  { label: "DashBoard", to: "/" },
+  { label: "Events", to: "/Events" },
+  { label: "Complaints", to: "/Complaints" },
+  { label: "Attendance", to: "/Attendance" },
+  { label: "QRGenerator", to: "/QRGenerator/:myString" },
+];
 
-const Navbar = () => {
-  
-const location = useLocation();
-const showNavbar = location.pathname!='/';
-  const [open, setOpen] = useState(false);
-  const currentPage = location.pathname.substring(1); // remove the leading forward slash
-  const [name, setName] = useState(currentPage);
+function Header() {
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  console.log("name", name);
-
-  const toggleDrawer = (isOpen) => (event) => {
-    event.preventDefault();
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-
-    setOpen(isOpen);
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
   };
 
-  const linkStyleHeaderNav = {
-    margin: "0 1rem",
-    textDecoration: "none",
-    color: "white",
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
   };
 
-  const linkStyle = {
-    margin: "0 1rem",
-    textDecoration: "none",
-    color: "black",
-  };
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };  
 
   const img = {
     maxWidth: "100%",
@@ -62,157 +45,114 @@ const showNavbar = location.pathname!='/';
     width: "auto",
   };
   return (
-    <div>
-      {showNavbar && (
-        <><AppBar position="static" sx={{ bgcolor: "ButtonText" }}>
-          <Toolbar>
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              onClick={toggleDrawer(true)}
-            >
-              <MenuIcon />
-            </IconButton>
+    <AppBar position="static" sx={{ backgroundColor: "black" }}>
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
             <div style={img}>
               <img
                 src={uwinLogo}
                 alt="Logo"
-                style={{ height: "40px", marginRight: "16px" }} />
-            </div>
-            <Hidden smDown>
-              <Typography style={linkStyleHeaderNav} variant="h6">
-                {name}
-              </Typography>
-            </Hidden>
-          </Toolbar>
-        </AppBar><Drawer anchor="left" open={open} onClose={toggleDrawer(false)}>
-            <div
-              role="presentation"
-              onClick={toggleDrawer(false)}
-              onKeyDown={toggleDrawer(false)}
+                style={{ height: "40px", marginRight: "16px" }}
+              />
+            </div>{" "}
+          </Typography>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
             >
-              <List>
-                <Link
-                  to="/DashBoard"
-                  style={linkStyle}
-                  onClick={() => setName("DashBoard")}
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: "block", md: "none" },
+              }}
+            >
+              {navLinks.map((link) => (
+                <Button
+                  key={link.to}
+                  component={Link}
+                  to={link.to}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "black", display: "block" }}
                 >
-                  <ListItem button>
-                    <ListItemIcon>
-                      <HomeIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="DashBoard" />
-                  </ListItem>
-                </Link>
-
-                <Link
-                  to="/Events"
-                  style={linkStyle}
-                  onClick={() => setName("Events")}
-                >
-                  <ListItem button>
-                    <ListItemIcon>
-                      <EventIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Events" />
-                  </ListItem>
-                </Link>
-                <Link
-                  to="/Complaints"
-                  style={linkStyle}
-                  onClick={() => setName("Support")}
-                >
-                  <ListItem button>
-                    <ListItemIcon>
-                      <ContactPageIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Support" />
-                  </ListItem>
-                </Link>
-                <Link
-                  to="/Attendance"
-                  style={linkStyle}
-                  onClick={() => setName("Attendance")}
-                >
-                  <ListItem button>
-                    <ListItemIcon>
-                      <AccountBoxIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Attendance" />
-                  </ListItem>
-                </Link>
-                <Link
-                  to="/Records"
-                  style={linkStyle}
-                  onClick={() => setName("Records")}
-                >
-                  <ListItem button>
-                    <ListItemIcon>
-                      <AccountBoxIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Records" />
-                  </ListItem>
-                </Link>
-              </List>
-            </div>
-          </Drawer></>
-      )}
-      
-    </div>
+                  <Typography textAlign="center"> {link.label}</Typography>
+                </Button>
+              ))}
+            </Menu>
+          </Box>
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href=""
+            sx={{
+              mr: 2,
+              display: { xs: "flex", md: "none" },
+              flexGrow: 1,
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            <div style={img}>
+              <img
+                src={uwinLogo}
+                alt="Logo"
+                style={{ height: "40px", marginRight: "16px" }}
+              />
+            </div>{" "}
+          </Typography>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            {navLinks.map((link) => (
+              <MenuItem
+                key={link.to}
+                component={Link}
+                to={link.to}
+                onClick={handleCloseNavMenu}
+                style={{ marginRight: 10 }}
+              >
+                <Typography textAlign="center"> {link.label}</Typography>
+              </MenuItem>
+            ))}
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
-};
-
-export default Navbar;
-
-// import * as React from "react";
-// import AppBar from "@mui/material/AppBar";
-// import CssBaseline from "@mui/material/CssBaseline";
-// import Toolbar from "@mui/material/Toolbar";
-// import Typography from "@mui/material/Typography";
-// import "./Navbar.css";
-
-// import { Link,  } from "react-router-dom";
-// import "./App.css";
-// import { color } from "@mui/system";
-
-// function Navbar() {
-
-//   const linkStyle = {
-//     margin: "1rem",
-
-//     color:"white",
-//     textdecoration:"none"
-//   };
-//   return (
-//     <AppBar className="appBar" position="relative">
-//       <CssBaseline />
-//       <Toolbar>
-//         <Typography variant="h4" >
-//           WIN MAC
-//         </Typography>
-//           <Link to="/DashBoard"  style={linkStyle}>
-//             DashBoard
-//           </Link>
-
-//           <Link to="/Events"  style={linkStyle}>
-//             Events
-//           </Link>
-//           <Link to="/Complaints"  style={linkStyle}>
-//           Complaints
-//           </Link>
-//           <Link to="/Attendance"  style={linkStyle}>
-//           Attendance
-//           </Link>
-//           <Link to="/Records"  style={linkStyle}>
-//           Records
-//           </Link>
-//           <Link to="/QRGenerator"  style={linkStyle}>
-//           QRGenerator
-//           </Link>
-//       </Toolbar>
-//     </AppBar>
-//   );
-// }
-
-// export default Navbar;
+}
+export default Header;
