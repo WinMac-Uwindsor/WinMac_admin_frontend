@@ -33,20 +33,22 @@ const LoginForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log("user",event.target.value)
+
     if (username !== VALID_USERNAME || password !== VALID_PASSWORD) {
       setError("Invalid username or password");
     } else {
       // Login successful
 
       navigate('/DashBoard');
-      localStorage.setItem('username',event.target.value);
+      localStorage.setItem('username',username);
 
       console.log("Login successful");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}  value={username}>
       <TextField
         label="Username"
         variant="outlined"
