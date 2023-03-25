@@ -61,30 +61,52 @@ function Dashboard() {
 
   function addData(){
     var i = 13;
-    axios({
-      method: 'post',
-      url: 'http://127.0.0.1:8000/field/',
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
-        'Access-Control-Allow-Headers': 'Content-Type',
-      },
-      body :{
-        "id": i,
-        "Name": `${excelData[i]['Name']}`,
-        "Company":  `${excelData[i]['Company']}`,
-        "Role":  `${excelData[i]['Role']}`,
-        "Date":  `${excelData[i]['Date']}`,
-        "InternshipDuration":  `${excelData[i]['InternshipDuration']}`,
-        "Intake":  `${excelData[i]['Intake']}`
-    }
-    })
+    const url = "http://127.0.0.1:8000/field/";
+    const data = {
+      "id": i,
+      "Name": `${excelData[i]['Name']}`,
+      "Company":  `${excelData[i]['Company']}`,
+      "Role":  `${excelData[i]['Role']}`,
+      "Date":  `${excelData[i]['Date']}`,
+      "InternshipDuration":  `${excelData[i]['InternshipDuration']}`,
+      "Intake":  `${excelData[i]['Intake']}`
+  };
+
+    axios
+      .post(url, data)
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
+     
       })
       .catch((error) => {
-        console.log(error);
+        console.error("This is error: ", error);
       });
+
+    
+    // axios({
+    //   method: 'post',
+    //   url: 'http://127.0.0.1:8000/field/',
+    //   headers: {
+    //     'Access-Control-Allow-Origin': '*',
+    //     'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+    //     'Access-Control-Allow-Headers': 'Content-Type',
+    //   },
+    //   body :{
+    //     "id": i,
+    //     "Name": `${excelData[i]['Name']}`,
+    //     "Company":  `${excelData[i]['Company']}`,
+    //     "Role":  `${excelData[i]['Role']}`,
+    //     "Date":  `${excelData[i]['Date']}`,
+    //     "InternshipDuration":  `${excelData[i]['InternshipDuration']}`,
+    //     "Intake":  `${excelData[i]['Intake']}`
+    // }
+    // })
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
     
     
     
