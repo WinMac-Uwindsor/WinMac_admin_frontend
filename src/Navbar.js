@@ -17,7 +17,8 @@ const navLinks = [
   { label: "Events", to: "/Events" },
   { label: "Complaints", to: "/Complaints" },
   { label: "Attendance", to: "/Attendance" },
-  { label: "QRGenerator", to: "/QRGenerator/:myString" },
+  { label: "Records", to: "/Records" },
+
 ];
 
 function Header() {
@@ -39,25 +40,32 @@ function Header() {
     setAnchorElUser(null);
   };
 
+  // function handleLogout() {
+  //   // Make an API call to logout the user
+  //   fetch("/api/logout", {
+  //     method: "POST",
+  //     credentials: "include",
+  //   })
+  //     .then((response) => {
+  //       if (response.ok) {
+  //         // Clear user session and redirect to login page
+  //         sessionStorage.clear();
+  //         window.location.href = "/login";
+  //       } else {
+  //         throw new Error("Logout failed.");
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }
+
   function handleLogout() {
-    // Make an API call to logout the user
-    fetch("/api/logout", {
-      method: "POST",
-      credentials: "include",
-    })
-      .then((response) => {
-        if (response.ok) {
-          // Clear user session and redirect to login page
-          sessionStorage.clear();
-          window.location.href = "/login";
-        } else {
-          throw new Error("Logout failed.");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    // Clear user session and redirect to login page
+    localStorage.clear();
+    window.location.href = "/login";
   }
+  
 
   const img = {
     maxWidth: "100%",
@@ -69,7 +77,7 @@ function Header() {
     <AppBar position="static" sx={{ backgroundColor: "black" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography
+           <Typography
             variant="h6"
             noWrap
             component="a"
@@ -84,13 +92,13 @@ function Header() {
               textDecoration: "none",
             }}
           >
-            <div style={img}>
+           <div style={img}>
               <img
                 src={uwinLogo}
                 alt="Logo"
                 style={{ height: "40px", marginRight: "16px" }}
-              />
-            </div>{" "}
+              /> 
+            </div>{" "} 
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton

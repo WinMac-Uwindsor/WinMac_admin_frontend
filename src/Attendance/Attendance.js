@@ -5,17 +5,21 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import axios from "axios";
 import Button from "@mui/material/Button";
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 // import makeStyles from '@mui/styles/makeStyles';
 
 const Attendance = () => {
     const username = localStorage.getItem('username');
-
+const navigate = useNavigate();
   const [attendance, setAttendanceList] = useState([]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if(username === null){
+      navigate('/login')
+    }
+  }, []);
 
   var intake = [];
 

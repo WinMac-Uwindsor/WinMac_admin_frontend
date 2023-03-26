@@ -7,17 +7,22 @@ import axios from "axios";
 import Typography from "@mui/material/Typography";
 import React, { useState, useEffect } from "react";
 import "./Complaints.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Complaints() {
   const username = localStorage.getItem('username');
+  const navigate = useNavigate();
 
   const [details, setDetails] = useState([]);
 
   useEffect(() => {
-    getComplsints();
+    if(username === null){
+      navigate('/login')
+    }
+    getComplaints();
   }, []);
 
-  function getComplsints() {
+  function getComplaints() {
     axios.get("https://acservices-winmac-admin.onrender.com/winmac/support/").then((response) => {
       setDetails(response.data);
       console.log("response: " + response.data);
@@ -32,7 +37,7 @@ export default function Complaints() {
       })
       .then((response) => {
         console.log("cancel success", response.data);
-        getComplsints();
+        getComplaints();
       })
       .catch((error) => {
         console.error("Error canceling booking:", error);

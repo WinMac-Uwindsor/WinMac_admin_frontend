@@ -1,20 +1,11 @@
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Box from "@mui/material/Box";
-import { indigo } from "@mui/material/colors";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
 import { useNavigate } from 'react-router-dom';
-
-
 import  { useState } from "react";
 
-const VALID_USERNAME = "myusername";
-const VALID_PASSWORD = "mypassword";
+const VALID_USERNAME = "abc";
+const VALID_PASSWORD = "abc";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
@@ -40,8 +31,9 @@ const LoginForm = () => {
     } else {
       // Login successful
 
-      navigate('/DashBoard');
+      navigate('/');
       localStorage.setItem('username',username);
+      navigate('/', { state: { username } });
 
       console.log("Login successful");
     }

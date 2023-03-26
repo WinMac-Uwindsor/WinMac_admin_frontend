@@ -1,22 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Data } from "../Components/DashboardData";
 import * as XLSX from "xlsx";
+import Chart from 'chart.js/auto';
+
 import { UserContext } from "../App";
 import { useContext } from "react";
 import { Pie } from "react-chartjs-2";
 import { Bar } from "react-chartjs-2";
 
 import "../Navbar.css";
-import { Button } from "@mui/material";
 import "./DashBoard.css";
-import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
-import { Box } from "@mui/system";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
   const username = localStorage.getItem("username");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(username === null){
+      navigate('/login')
+    }
+  }, []);
   // on change states
   const [excelFile, setExcelFile] = useState(null);
+
 
   const [excelFileError, setExcelFileError] = useState(null);
   const labels = ["January", "February", "March", "April", "May", "June"];
@@ -37,6 +45,7 @@ function Dashboard() {
   // const username = useContext(UserContext);
   console.log("uname", username);
 
+ 
   // file handler
   //todo: Add types of files
   const fileType = ["application/vnd.ms-excel"];

@@ -11,10 +11,10 @@ import Records from "./Records/Records";
 import Login from "./Login/Login";
 import QRGenerator from "./QR/QRGenerator";
 import UpdateEvent from "./Events/UpdateEvent";
-import Header from "./Navbar";
 import MayBeShowNavbar from "./Login/MayBeShowNavbar";
 
 function App() {
+  const isLoggedIn = sessionStorage.getItem("isLoggedIn");
 
   return (
     <BrowserRouter>

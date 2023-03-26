@@ -12,9 +12,6 @@ import UpdateEvent from "./UpdateEvent";
 import Backdrop from "@mui/material/Backdrop";
 import Fade from "@mui/material/Fade";
 import Box from "@mui/material/Box";
-import moment from "moment";
-
-
 import Modal from "@mui/material/Modal";
 
 const style = {
@@ -33,6 +30,7 @@ const Events = (props) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const username = localStorage.getItem("username");
 
   const navigate = useNavigate();
   function handleGenerateQR(eventId) {
@@ -53,6 +51,9 @@ const Events = (props) => {
   const [endTime, setEndTime] = useState("");
 
   useEffect(() => {
+    if(username === null){
+      navigate('/login')
+    }
     getEvents();
   }, []);
 
