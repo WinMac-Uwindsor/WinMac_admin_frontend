@@ -16,9 +16,9 @@ const navigate = useNavigate();
   const [attendance, setAttendanceList] = useState([]);
 
   useEffect(() => {
-    if(username === null){
-      navigate('/login')
-    }
+    // if(username === null){
+    //   navigate('/login')
+    // }
   }, []);
 
   var intake = [];

@@ -37,7 +37,7 @@ function Dashboard() {
       const red = Math.floor(Math.random() * 256);
       const green = Math.floor(Math.random() * 256);
       const blue = Math.floor(Math.random() * 256);
-      colors.push(`rgba(${red}, ${green}, ${blue}, 0.2)`);
+      colors.push(`rgba(${red}, ${green}, ${blue}, 0.7)`);
     }
     return colors;
   }
@@ -65,9 +65,9 @@ function Dashboard() {
     );
   }
   useEffect(() => {
-    if (username === null) {
-      navigate("/login");
-    }
+    // if (username === null) {
+    //   navigate("/login");
+    // }
   }, []);
   // on change states
   const [excelFile, setExcelFile] = useState(null);
@@ -104,6 +104,22 @@ function Dashboard() {
         backgroundColor: getRandomColors(countByRoles.length),
         borderColor: "rgb(255, 99, 132)",
         data: countByRoles.map((e) => e.company),
+        fill: true,
+      },
+    ],
+  };
+
+  const topCompaniesData = {
+    labels: topCompaniesByStudents.map((e) =>
+      e.Company
+        
+    ),
+    datasets: [
+      {
+        label: "",
+        backgroundColor: getRandomColors(topCompaniesByStudents.length),
+        borderColor: "rgb(255, 99, 132)",
+        data: topCompaniesByStudents.map((e) => e.num_students),
         fill: true,
       },
     ],
@@ -155,70 +171,9 @@ function Dashboard() {
   return (
     <>
       {/* upload file section */}
-      Welcome, {username}!{/* <Line data={data} /> */}
+      {/* <Line data={data} /> */}
       {/* <Bar data={countByRolesData}  />
       <Bar data={data} /> */}
-      <Box
-        sx={{
-          display: "grid",
-          gridTemplateColumns: "repeat(1, 0.5fr)",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Item>
-          <Bar data={countByRolesData} />
-        </Item>
-       
-
-        <Item>
-          <Doughnut data={data} />
-        </Item>
-        
-      </Box>
-      {/* <Pie data={data} /> */}
-      {/* <div className="rowC"> */}
-      {/* <Box sx={{ width: "150vh" }} options={{ responsive: true, maintainAspectRatio: false }}>
-        <Line data={data} />
-       
-      </Box>
-      <Box sx={{  width: "80vh" }} options={{ responsive: true, maintainAspectRatio: false }}>
-
-      <Pie data={data} />
-      </Box>
-      
-      <Box sx={{  width: "80vh", }} options={{ responsive: true, maintainAspectRatio: false }}>
-
-<Bar data={data} />
-</Box> */}
-      {/* </div> */}
-      <TableContainer component={Paper} sx={{padding:"50px" , borderRadius:"20px"}}>
-        <Table>
-          <TableHead>
-            <TableRow sx={{ background: "#2196f3" }}>
-              <TableCell sx={{ color: "#fff" }}>Company</TableCell>
-              <TableCell sx={{ color: "#fff" }}>Job Title</TableCell>
-              <TableCell sx={{ color: "#fff" }}>Skills</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {scrappedData.map((item, index) => (
-              <TableRow
-                key={item.job_titles}
-                sx={{ background: index % 2 === 0 ? "#f2f2f2" : "#fff" }}
-              >
-                <TableCell sx={{ fontWeight: "bold" }}>
-                  {item.company.toUpperCase()}
-                </TableCell>
-                <TableCell sx={{ fontWeight: "bold" }}>
-                  {item.job_titles.toUpperCase()}
-                </TableCell>
-                <TableCell>{item.skills}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
       <div className="form">
         <form className="form-group" autoComplete="off" onSubmit={handleSubmit}>
           <label>
@@ -280,6 +235,74 @@ function Dashboard() {
           </div>
         )}
       </div>
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: "repeat(1, 0.5fr)",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <h1>Count By Roles </h1>
+        <Item>
+          <Bar data={countByRolesData} />
+        </Item>
+       
+        <h1>No. of Students Placed in different Companies </h1>
+        <Item>
+          <Doughnut data={data} />
+        </Item>
+        <h1>Job Offers by Top Companies</h1>
+        <Item>
+          <Line data={topCompaniesData} />
+        </Item>
+      </Box>
+      {/* <Pie data={data} /> */}
+      {/* <div className="rowC"> */}
+      {/* <Box sx={{ width: "150vh" }} options={{ responsive: true, maintainAspectRatio: false }}>
+        <Line data={data} />
+       
+      </Box>
+      <Box sx={{  width: "80vh" }} options={{ responsive: true, maintainAspectRatio: false }}>
+
+      <Pie data={data} />
+      </Box>
+      
+      <Box sx={{  width: "80vh", }} options={{ responsive: true, maintainAspectRatio: false }}>
+
+<Bar data={data} />
+</Box> */}
+      {/* </div> */}
+
+      <h1 style={{ paddingLeft: '50px' }}>Skills Required for Specific Job Roles</h1>
+      <TableContainer component={Paper} sx={{padding:"50px" , borderRadius:"20px"}}>
+        <Table>
+          <TableHead>
+            <TableRow sx={{ background: "#2196f3" }}>
+              <TableCell sx={{ color: "#fff" }}>Company</TableCell>
+              <TableCell sx={{ color: "#fff" }}>Job Title</TableCell>
+              <TableCell sx={{ color: "#fff" }}>Skills</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {scrappedData.map((item, index) => (
+              <TableRow
+                key={item.job_titles}
+                sx={{ background: index % 2 === 0 ? "#f2f2f2" : "#fff" }}
+              >
+                <TableCell sx={{ fontWeight: "bold" }}>
+                  {item.company.toUpperCase()}
+                </TableCell>
+                <TableCell sx={{ fontWeight: "bold" }}>
+                  {item.job_titles.toUpperCase()}
+                </TableCell>
+                <TableCell>{item.skills}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      
     </>
   );
 }

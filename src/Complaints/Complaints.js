@@ -16,9 +16,9 @@ export default function Complaints() {
   const [details, setDetails] = useState([]);
 
   useEffect(() => {
-    if(username === null){
-      navigate('/login')
-    }
+    // if(username === null){
+    //   navigate('/login')
+    // }
     getComplaints();
   }, []);
 

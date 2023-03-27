@@ -51,9 +51,9 @@ const Events = (props) => {
   const [endTime, setEndTime] = useState("");
 
   useEffect(() => {
-    if(username === null){
-      navigate('/login')
-    }
+    // if(username === null){
+    //   navigate('/login')
+    // }
     getEvents();
   }, []);
 
@@ -139,18 +139,21 @@ const Events = (props) => {
     <div className="event">
       <form className="form" onSubmit={handleFormSubmit}>
         <TextField
+        style={{paddingBottom:"20px"}}
           label="Title"
           value={title}
           onChange={(event) => setTitle(event.target.value)}
           required
         />
         <TextField
+         style={{paddingBottom:"20px"}}
           label="Description"
           value={description}
           onChange={(event) => setDescription(event.target.value)}
           required
         />
         <TextField
+         style={{paddingBottom:"20px"}}
           label="Author"
           value={author}
           onChange={(event) => setAuthor(event.target.value)}
@@ -158,6 +161,7 @@ const Events = (props) => {
           required
         />
         <TextField
+         style={{paddingBottom:"20px"}}
           label="Limit"
           type="number"
           pattern="[0-9]*"
@@ -166,6 +170,7 @@ const Events = (props) => {
           required
         />
         <TextField
+         style={{paddingBottom:"20px"}}
           label="Location"
           value={location}
           onChange={(event) => setLocation(event.target.value)}

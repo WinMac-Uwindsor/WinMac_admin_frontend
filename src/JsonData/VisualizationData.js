@@ -187,7 +187,7 @@ export const scrappedData = [
 ];
 
 export const studentsPlaced = [
-  {
+   {
     "BDO Canada LLP": {
       "Full-stack Developer": 2,
       "Quality/Business Analyst": 1,
