@@ -5,17 +5,21 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import axios from "axios";
 import Button from "@mui/material/Button";
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 // import makeStyles from '@mui/styles/makeStyles';
 
 const Attendance = () => {
     const username = localStorage.getItem('username');
-
+const navigate = useNavigate();
   const [attendance, setAttendanceList] = useState([]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    // if(username === null){
+    //   navigate('/login')
+    // }
+  }, []);
 
   var intake = [];
 
@@ -118,13 +122,13 @@ const Attendance = () => {
   return (
     <div className="attendance">
       <div className="button-container">
-        <Button variant="contained" className="button-container" sx ={{margin: 2}} onClick={handleAttendanceFall}>
+        <Button variant="contained"  sx ={{margin: 2, backgroundColor: "black"}} onClick={handleAttendanceFall}>
           Fall
         </Button>
-        <Button sx ={{margin: 2}} variant="contained" onClick={handleAttendanceSpring}>
+        <Button sx ={{margin: 2,  backgroundColor: "black"}} variant="contained"  onClick={handleAttendanceSpring}>
           Summer
         </Button>
-        <Button sx ={{margin: 2}} variant="contained" onClick={handleAttendanceWinter}>
+        <Button sx ={{margin: 2 , backgroundColor: "black"}} variant="contained" onClick={handleAttendanceWinter}>
           Winter
         </Button>
       </div>

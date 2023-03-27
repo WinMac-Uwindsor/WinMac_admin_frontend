@@ -1,218 +1,177 @@
-import React, { useState } from "react";
+import * as React from "react";
+import { Link, useLocation } from "react-router-dom";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import { Link } from "react-router-dom";
-import { AppBar } from "@mui/material";
-import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import { ListItemIcon } from "@mui/material";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import MenuIcon from "@mui/icons-material/Menu";
-import HomeIcon from "@mui/icons-material/Home";
-import { ListItemText } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
-import BookIcon from "@mui/icons-material/Book";
-
-import Hidden from "@mui/material/Hidden";
-import EventIcon from "@mui/icons-material/Event";
-import { useLocation } from "react-router-dom";
-
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import Typography from "@mui/material/Typography";
 import uwinLogo from "./uwindsor_logo.png";
-import ContactPageIcon from "@mui/icons-material/ContactPage";
 
+const navLinks = [
+  { label: "DashBoard", to: "/" },
+  { label: "Events", to: "/Events" },
+  { label: "Complaints", to: "/Complaints" },
+  { label: "Attendance", to: "/Attendance" },
+  { label: "Records", to: "/Records" },
 
-const Navbar = () => {
-  
-const location = useLocation();
-const showNavbar = location.pathname!='/';
-  const [open, setOpen] = useState(false);
-  const currentPage = location.pathname.substring(1); // remove the leading forward slash
-  const [name, setName] = useState(currentPage);
+];
+function Header() {
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const location = useLocation();
 
-  console.log("name", name);
-
-  const toggleDrawer = (isOpen) => (event) => {
-    event.preventDefault();
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-
-    setOpen(isOpen);
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
   };
 
-  const linkStyleHeaderNav = {
-    margin: "0 1rem",
-    textDecoration: "none",
-    color: "white",
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
   };
 
-  const linkStyle = {
-    margin: "0 1rem",
-    textDecoration: "none",
-    color: "black",
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
   };
+
+  function handleLogout() {
+    // Clear user session and redirect to login page
+    localStorage.clear();
+    window.location.href = "/login";
+  }
 
   const img = {
     maxWidth: "100%",
     height: "auto",
     width: "auto",
   };
+
   return (
-    <div>
-      {showNavbar && (
-        <><AppBar position="static" sx={{ bgcolor: "ButtonText" }}>
-          <Toolbar>
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              onClick={toggleDrawer(true)}
-            >
-              <MenuIcon />
-            </IconButton>
+    <AppBar position="static" sx={{ backgroundColor: "black" }}>
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
             <div style={img}>
               <img
                 src={uwinLogo}
                 alt="Logo"
-                style={{ height: "40px", marginRight: "16px" }} />
-            </div>
-            <Hidden smDown>
-              <Typography style={linkStyleHeaderNav} variant="h6">
-                {name}
-              </Typography>
-            </Hidden>
-          </Toolbar>
-        </AppBar><Drawer anchor="left" open={open} onClose={toggleDrawer(false)}>
-            <div
-              role="presentation"
-              onClick={toggleDrawer(false)}
-              onKeyDown={toggleDrawer(false)}
+                style={{ height: "40px", marginRight: "16px" }}
+              />
+            </div>{" "}
+          </Typography>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
             >
-              <List>
-                <Link
-                  to="/DashBoard"
-                  style={linkStyle}
-                  onClick={() => setName("DashBoard")}
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+            >
+              {navLinks.map((link) => (
+                <MenuItem
+                  key={link.label}
+                  component={Link}
+                  to={link.to}
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    color: location.pathname === link.to ? "secondary.main" : "",
+                    backgroundColor: location.pathname === link.to ? "secondary.light" : "",
+                    borderRadius: "10px",
+                  }}
+                  
                 >
-                  <ListItem button>
-                    <ListItemIcon>
-                      <HomeIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="DashBoard" />
-                  </ListItem>
-                </Link>
+                  {link.label}
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            {navLinks.map((link) => (
+              <Button
+                key={link.label}
+                component={Link}
+                to={link.to}
+                sx={{
+                  color: location.pathname === link.to ? "black" : "inherit",
+                  backgroundColor: location.pathname === link.to ? "white" : "transparent",
 
-                <Link
-                  to="/Events"
-                  style={linkStyle}
-                  onClick={() => setName("Events")}
-                >
-                  <ListItem button>
-                    <ListItemIcon>
-                      <EventIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Events" />
-                  </ListItem>
-                </Link>
-                <Link
-                  to="/Complaints"
-                  style={linkStyle}
-                  onClick={() => setName("Support")}
-                >
-                  <ListItem button>
-                    <ListItemIcon>
-                      <ContactPageIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Support" />
-                  </ListItem>
-                </Link>
-                <Link
-                  to="/Attendance"
-                  style={linkStyle}
-                  onClick={() => setName("Attendance")}
-                >
-                  <ListItem button>
-                    <ListItemIcon>
-                      <AccountBoxIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Attendance" />
-                  </ListItem>
-                </Link>
-                <Link
-                  to="/Records"
-                  style={linkStyle}
-                  onClick={() => setName("Records")}
-                >
-                  <ListItem button>
-                    <ListItemIcon>
-                      <AccountBoxIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Records" />
-                  </ListItem>
-                </Link>
-              </List>
-            </div>
-          </Drawer></>
-      )}
-      
-    </div>
+                }}
+                
+              >
+                {link.label}
+              </Button>
+            ))}
+          </Box>
+          <Box sx={{ flexGrow: 1 }} />
+          <Box sx={{ display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenUserMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            </Menu>
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
-};
+}
 
-export default Navbar;
-
-// import * as React from "react";
-// import AppBar from "@mui/material/AppBar";
-// import CssBaseline from "@mui/material/CssBaseline";
-// import Toolbar from "@mui/material/Toolbar";
-// import Typography from "@mui/material/Typography";
-// import "./Navbar.css";
-
-// import { Link,  } from "react-router-dom";
-// import "./App.css";
-// import { color } from "@mui/system";
-
-// function Navbar() {
-
-//   const linkStyle = {
-//     margin: "1rem",
-
-//     color:"white",
-//     textdecoration:"none"
-//   };
-//   return (
-//     <AppBar className="appBar" position="relative">
-//       <CssBaseline />
-//       <Toolbar>
-//         <Typography variant="h4" >
-//           WIN MAC
-//         </Typography>
-//           <Link to="/DashBoard"  style={linkStyle}>
-//             DashBoard
-//           </Link>
-
-//           <Link to="/Events"  style={linkStyle}>
-//             Events
-//           </Link>
-//           <Link to="/Complaints"  style={linkStyle}>
-//           Complaints
-//           </Link>
-//           <Link to="/Attendance"  style={linkStyle}>
-//           Attendance
-//           </Link>
-//           <Link to="/Records"  style={linkStyle}>
-//           Records
-//           </Link>
-//           <Link to="/QRGenerator"  style={linkStyle}>
-//           QRGenerator
-//           </Link>
-//       </Toolbar>
-//     </AppBar>
-//   );
-// }
-
-// export default Navbar;
+export default Header;

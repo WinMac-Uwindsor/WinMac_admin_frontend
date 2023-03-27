@@ -1,14 +1,9 @@
 import Button from "@mui/material/Button";
 import "./Events.css";
 import axios from "axios";
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
 import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import { useNavigate } from 'react-router-dom';
-import { Update } from "@mui/icons-material";
 
 
 const UpdateEvent = () => {
