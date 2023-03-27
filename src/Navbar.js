@@ -37,13 +37,34 @@ function Header() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
-  };  
+  };
+
+  function handleLogout() {
+    // Make an API call to logout the user
+    fetch("/api/logout", {
+      method: "POST",
+      credentials: "include",
+    })
+      .then((response) => {
+        if (response.ok) {
+          // Clear user session and redirect to login page
+          sessionStorage.clear();
+          window.location.href = "/login";
+        } else {
+          throw new Error("Logout failed.");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 
   const img = {
     maxWidth: "100%",
     height: "auto",
     width: "auto",
   };
+
   return (
     <AppBar position="static" sx={{ backgroundColor: "black" }}>
       <Container maxWidth="xl">
@@ -86,73 +107,46 @@ function Header() {
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
+                vertical: "top",
+                horizontal: "right",
               }}
-              keepMounted
               transformOrigin={{
                 vertical: "top",
-                horizontal: "left",
+                horizontal: "right",
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
             >
               {navLinks.map((link) => (
-                <Button
-                  key={link.to}
-                  component={Link}
-                  to={link.to}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "black", display: "block" }}
-                >
-                  <Typography textAlign="center"> {link.label}</Typography>
-                </Button>
+                <MenuItem key={link.label}>
+                  <Link
+                    to={link.to}
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    {link.label}
+                  </Link>
+                </MenuItem>
               ))}
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>
           </Box>
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            <div style={img}>
-              <img
-                src={uwinLogo}
-                alt="Logo"
-                style={{ height: "40px", marginRight: "16px" }}
-              />
-            </div>{" "}
-          </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {navLinks.map((link) => (
-              <MenuItem
-                key={link.to}
+              <Button
+                key={link.label}
                 component={Link}
                 to={link.to}
-                onClick={handleCloseNavMenu}
-                style={{ marginRight: 10 }}
+                color="inherit"
               >
-                <Typography textAlign="center"> {link.label}</Typography>
-              </MenuItem>
+                {link.label}
+              </Button>
             ))}
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </Box>
         </Toolbar>
       </Container>
     </AppBar>
   );
 }
+
 export default Header;
