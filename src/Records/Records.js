@@ -112,7 +112,7 @@ function Records() {
           {excelFileError&&<div className='text-danger'
           style={{marginTop:5+'px'}}>{excelFileError}</div>}
           <button type='submit' className='btn btn-success'
-          style={{marginTop:5+'px'}}>Submit</button>
+          style={{marginTop:5+'px', backgroundColor:"black"}}>Submit</button>
         </form>
       </div>
 
@@ -123,7 +123,7 @@ function Records() {
       <h5>View Excel file</h5>
       <button onClick={(data)=>
       addStudents(dataS)} className='btn btn-success'
-          style={{marginTop:5+'px'}}>Send Data</button>
+          style={{marginTop:5+'px', backgroundColor:"black"}}>Send Data</button>
       </div>
      
       <div className='viewer'>

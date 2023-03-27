@@ -194,7 +194,7 @@ function Dashboard() {
           <button
             type="submit"
             className="btn btn-success"
-            style={{ marginTop: 5 + "px" }}
+            style={{ marginTop: 5 + "px", backgroundColor:"black" }}
           >
             Submit
           </button>
@@ -208,7 +208,7 @@ function Dashboard() {
         <button
           onClick={() => setExcelData(null)}
           className="btn btn-success"
-          style={{ marginTop: 5 + "px" }}
+          style={{ marginTop: 5 + "px", backgroundColor:"black" }}
         >
           Send Data
         </button>

@@ -122,13 +122,13 @@ const navigate = useNavigate();
   return (
     <div className="attendance">
       <div className="button-container">
-        <Button variant="contained" className="button-container" sx ={{margin: 2}} onClick={handleAttendanceFall}>
+        <Button variant="contained"  sx ={{margin: 2, backgroundColor: "black"}} onClick={handleAttendanceFall}>
           Fall
         </Button>
-        <Button sx ={{margin: 2}} variant="contained" onClick={handleAttendanceSpring}>
+        <Button sx ={{margin: 2,  backgroundColor: "black"}} variant="contained"  onClick={handleAttendanceSpring}>
           Summer
         </Button>
-        <Button sx ={{margin: 2}} variant="contained" onClick={handleAttendanceWinter}>
+        <Button sx ={{margin: 2 , backgroundColor: "black"}} variant="contained" onClick={handleAttendanceWinter}>
           Winter
         </Button>
       </div>
